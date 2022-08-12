@@ -1,0 +1,11 @@
+{
+  "name": "iam_snap",
+  "version": "1.0.0",
+  "description": "allows metamask wallet to be used as an Identity Manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "test_iam_snap"
+  },
+  "author": "",
+  "license": "ISC"
+}

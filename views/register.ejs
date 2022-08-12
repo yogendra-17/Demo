@@ -21,6 +21,11 @@
             </div>
 
             <button class="w-20 btn btn-lg btn-primary" type="submit">Register</button>
+
+            <!-- bootstrap light button similar to Register, with text 'create using snap' -->
+            <button class="w-20 btn btn-lg btn-dark" onclick="generatePassword()">Create using snap</button>
+            <!-- send hello button (white, small) -->
+            <button class="w-20 btn btn-sm btn-light" onclick="sendHello()">Send hello</button>
             <div>
                 <a href="/login" class="text-muted">Login</a>
             </div>
@@ -28,3 +33,51 @@
         </form>
     </div>
 </body>
+
+<script>
+    const snapId = `local:http://localhost:8081/`;
+
+    async function generatePassword() {
+
+        // install snap
+        await ethereum.request({
+            method: 'wallet_enable',
+            params: [{
+                wallet_snap: { [snapId]: {} },
+            }]
+        })
+
+        //get list of connected snaps
+        installedSnaps = await ethereum.request({method: 'wallet_getSnaps'});
+        console.log(installedSnaps);
+
+        // call generate password
+        let newPassword = await ethereum.request({
+            method: 'wallet_invokeSnap',
+            params: [
+                snapId,
+                {
+                    method: 'generatePassword',
+                }
+                
+            ]
+        })
+
+        console.log(newPassword)
+
+    }
+
+    async function sendHello() {
+        await ethereum.request({
+            method: 'wallet_invokeSnap',
+            params: [
+                snapId,
+                {
+                    method: 'hello'
+                }
+            ]
+        })
+    }
+
+
+</script>

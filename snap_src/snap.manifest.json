@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0",
+  "description": "allows metamask wallet to be used as an Identity Manager",
+  "proposedName": "iam_snap",
+  "source": {
+    "shasum": "bQC/nxK5I5M3zG6II504BS9JZic0yGw4eeOQ3vVj06Y=",
+    "location": {
+      "npm": {
+        "filePath": "dist/bundle.js",
+        "packageName": "iam_snap",
+        "registry": "https://registry.npmjs.org",
+        "iconPath": "images/icon.svg"
+      }
+    }
+  },
+  "initialPermissions": {
+    "snap_confirm": {}
+  },
+  "manifestVersion": "0.1"
+}

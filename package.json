@@ -4,6 +4,7 @@
   "description": "simple login page",
   "main": "index.js",
   "scripts": {
+    "startSnap": "cd snap_src && mm-snap serve",
     "devStart": "nodemon server.js",
     "start": "node server.js"
   },

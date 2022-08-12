@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "startSnap": "cd snap_src && mm-snap serve",
+    "buildSnap": "cd snap_src && sudo mm-snap build",
     "devStart": "nodemon server.js",
     "start": "node server.js"
   },

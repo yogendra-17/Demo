@@ -3,7 +3,7 @@
   "description": "allows metamask wallet to be used as an Identity Manager",
   "proposedName": "iam_snap",
   "source": {
-    "shasum": "bQC/nxK5I5M3zG6II504BS9JZic0yGw4eeOQ3vVj06Y=",
+    "shasum": "/4HKDBMBi3UzhiPe1pE4m+Wev1SO6UEPfXRp1+4boAo=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",

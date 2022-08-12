@@ -1,19 +1,5 @@
 module.exports.onRpcRequest = async ({ origin, request }) => {
   switch (request.method) {
-    case 'hello':
-      return wallet.request({
-        method: 'snap_confirm',
-        params: [
-          {
-            prompt: `Hello, ${origin}!`,
-            description:
-              'This custom confirmation is just for display purposes.',
-            textAreaContent:
-              'But you can edit the snap source code to make it do something, if you want to!',
-          },
-        ],
-      });
-
 
     case 'generatePassword':
 
@@ -31,7 +17,7 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
       })
 
       if (!confirmation) {
-        return { error: 'User denied' };
+        return { error: 'User denied permission to generate password' };
       }
       else {
         return "Password123";

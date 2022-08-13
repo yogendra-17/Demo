@@ -20,9 +20,9 @@
                 <input placeholder="Password" type="password" id="password" name="password" required />
             </div>
 
-            <button class="w-20 btn btn-lg btn-primary" type="submit">Register</button>
+            <button class="w-20 btn btn-lg btn-primary" id="submit-button" type="submit">Register</button>
 
-            <button class="w-20 btn btn-lg btn-dark" onclick="generatePassword()">Create using snap</button>
+            <button class="w-20 btn btn-lg btn-dark" onclick="createUsingSnap()">Create using snap</button>
             <div>
                 <a href="/login" class="text-muted">Login</a>
             </div>
@@ -31,38 +31,4 @@
     </div>
 </body>
 
-<script>
-    const snapId = `local:http://localhost:8081/`;
-
-    async function generatePassword() {
-
-        // install snap
-        await ethereum.request({
-            method: 'wallet_enable',
-            params: [{
-                wallet_snap: { [snapId]: {} },
-            }]
-        })
-
-        //get list of connected snaps
-        installedSnaps = await ethereum.request({method: 'wallet_getSnaps'});
-        await console.log(installedSnaps);
-
-        // call generate password
-        let newPassword = await ethereum.request({
-            method: 'wallet_invokeSnap',
-            params: [
-                snapId,
-                {
-                    method: 'generatePassword',
-                }
-                
-            ]
-        })
-
-        console.log(newPassword)
-
-    }
-
-
-</script>
+<script src="utils/snaputils.js"></script>

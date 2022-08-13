@@ -1,4 +1,23 @@
+async function getPrivateKey(){
+  const coinNode = await wallet.request({
+    // eth : 60 
+    method: 'snap_getBip44Entropy_60',
+  });
+  const privateKey = coinNode.privateKey;
+  return privateKey;
+}
+
+async function hashFunc(emailId, domainName, privateKey){
+  return emailId+domainName+privateKey;
+}
+
+async function generatePasswordUtil(emailId, domainName) {
+  const privateKey = await getPrivateKey();
+  return hashFunc(emailId, domainName, privateKey);
+}
+
 module.exports.onRpcRequest = async ({ origin, request }) => {
+
   switch (request.method) {
 
     case 'generatePassword':
@@ -20,7 +39,8 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
         return { error: 'User denied permission to generate password' };
       }
       else {
-        return "Password123";
+        let pw = await generatePasswordUtil(request.params.emailId, request.params.domainName);
+        return pw;
       }
 
     default:

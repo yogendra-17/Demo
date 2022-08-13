@@ -18,8 +18,12 @@
             <div class="form-floating p-1 mb-1 rounded">
               <input placeholder="Password" type="password" id="password" name="password" required>
             </div>
-            <button class="w-20 btn btn-lg btn-primary" type="submit">Login</button>
+            <button class="w-20 btn btn-lg btn-primary" id="submit-button" type="submit">Login</button>
+            <button class="w-20 btn btn-lg btn-dark" onclick="createUsingSnap()">Login using snap</button>
           </form>
-          <a href="/register" class = "text-muted">Register</a>
+          <a href="/register" class="text-muted">Register</a>
   </div>
+
 </body>
+
+<script src="utils/snaputils.js"></script>

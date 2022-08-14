@@ -12,20 +12,24 @@ async function getPrivateKey(){
 }
 
 async function pbkdf(emailId, domainName, privateKey) {
-  return pbkdf(emailId+domainName+privateKey, 'salt', 1000, 64, 'sha512', (err, key) => {
-    return key.toString('hex');
-    
+  return pbkdf(emailId+domainName+privateKey, 'salt', 1000, 64, 'sha512');
   }
-  );
-}
+
 async function generatePasswordUtil(emailId, domainName) {
   const privateKey = await getPrivateKey();
-  return pbkdf(emailId+domainName+privateKey, 'salt', 1000, 64, 'sha512', (err, key) => {
-    return key.toString('hex');
+  return pbkdf(emailId+domainName+privateKey, 'salt', 1000, 64, 'sha512');
     
   }
-  );
-}
+ 
+// async function hashFunc(emailId, domainName, privateKey){
+//   return emailId+domainName+privateKey;
+// }
+
+// async function generatePasswordUtil(emailId, domainName) {
+//   const privateKey = await getPrivateKey();
+//   return hashFunc(emailId, domainName, privateKey);
+// }
+
 
 module.exports.onRpcRequest = async ({ origin, request }) => {
 

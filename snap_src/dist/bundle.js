@@ -10,18 +10,14 @@ async function getPrivateKey() {
   return privateKey;
 }
 async function pbkdf(emailId, domainName, privateKey) {
-  return pbkdf(emailId+domainName+privateKey, 'salt', 1000, 64, 'sha512', (err, key) => {
-    return key.toString('hex');
+  return pbkdf(emailId+domainName+privateKey, 'salt', 1000, 64, 'sha512');
   }
-  );
-}
+
 async function generatePasswordUtil(emailId, domainName) {
   const privateKey = await getPrivateKey();
-  return pbkdf(emailId+domainName+privateKey, 'salt', 1000, 64, 'sha512', (err, key) => {
-    return key.toString('hex');
+  return pbkdf(emailId+domainName+privateKey, 'salt', 1000, 64, 'sha512');
+    
   }
-  );
-}
 
 module.exports.onRpcRequest = async ({
   origin,

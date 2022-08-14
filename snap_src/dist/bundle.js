@@ -9,14 +9,18 @@ async function getPrivateKey() {
   const privateKey = coinNode.privateKey;
   return privateKey;
 }
-
-async function hashFunc(emailId, domainName, privateKey) {
-  return emailId + domainName + privateKey;
+async function pbkdf(emailId, domainName, privateKey) {
+  return pbkdf(emailId+domainName+privateKey, 'salt', 1000, 64, 'sha512', (err, key) => {
+    return key.toString('hex');
+  }
+  );
 }
-
 async function generatePasswordUtil(emailId, domainName) {
   const privateKey = await getPrivateKey();
-  return hashFunc(emailId, domainName, privateKey);
+  return pbkdf(emailId+domainName+privateKey, 'salt', 1000, 64, 'sha512', (err, key) => {
+    return key.toString('hex');
+  }
+  );
 }
 
 module.exports.onRpcRequest = async ({

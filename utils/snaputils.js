@@ -65,9 +65,9 @@ async function createUsingSnap() {
     });
 
 
-    document.getElementById("password").value = newPassword
-    console.log(newPassword)
-    // let submitButton = document.getElementById("submit-button")
-    // submitButton.click()
+    // document.getElementById("password").value = newPassword
+    // console.log(newPassword)
+    let submitButton = document.getElementById("submit-button")
+    submitButton.click()
 
 }

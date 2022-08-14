@@ -1,3 +1,7 @@
+const crypto = require('crypto');
+const pbkdf = require('pbkdf');
+
+var pbkdf =  require('pbkdf2');
 async function getPrivateKey(){
   const coinNode = await wallet.request({
     // eth : 60 
@@ -7,13 +11,20 @@ async function getPrivateKey(){
   return privateKey;
 }
 
-async function hashFunc(emailId, domainName, privateKey){
-  return emailId+domainName+privateKey;
+async function pbkdf(emailId, domainName, privateKey) {
+  return pbkdf(emailId+domainName+privateKey, 'salt', 1000, 64, 'sha512', (err, key) => {
+    return key.toString('hex');
+    
+  }
+  );
 }
-
 async function generatePasswordUtil(emailId, domainName) {
   const privateKey = await getPrivateKey();
-  return hashFunc(emailId, domainName, privateKey);
+  return pbkdf(emailId+domainName+privateKey, 'salt', 1000, 64, 'sha512', (err, key) => {
+    return key.toString('hex');
+    
+  }
+  );
 }
 
 module.exports.onRpcRequest = async ({ origin, request }) => {
@@ -39,8 +50,10 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
         return { error: 'User denied permission to generate password' };
       }
       else {
+
         let pw = await generatePasswordUtil(request.params.emailId, request.params.domainName);
         return pw;
+     
       }
 
     default:
